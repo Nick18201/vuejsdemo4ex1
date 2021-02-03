@@ -11,16 +11,21 @@
   <div id="app"
     class="ui container">
     <h1>GitHub Profiles</h1>
-    <github-user-card username="Nick18201"></github-user-card>
+    <!-- here goes the component for the card -->
+    <div class="ui cards">
+      <github-user-card v-for="username in usernames" :username="username"></github-user-card>
+    </div>
   </div>
 
+
+<!-- Here goes the template for the card -->
   <script type="text/x-template" id="github-user-card-template">
     <div class="ui card">
       <div class="image">
         <img :src="user.avatar_url">
       </div>
       <div class="content">
-        <a class="header">{{user.name}}</a>
+        <a :href="`https://github.com/${username}`"  target="_blank" class="header">{{user.name}}</a>
         <div class="meta">
           <span class="location">Livin' in {{user.location}}</span>
         </div>
@@ -29,16 +34,20 @@
         </div>
       </div>
       <div class="extra content">
-        <a>
+        <a :href="`https://github.com/${username}?tab=followers`" target="_blank">
           <i class="user icon"></i>
           {{user.followers}} Friends
         </a>
       </div>
     </div>
   </script>
+
+
   <!-- Import Vue.js and axios -->
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
 
   <!-- Your JavaScript Code :) -->
   <script>
@@ -62,9 +71,12 @@
         })
       }
     })
-
+// initiating the instance of Vue
     new Vue({
-      el: '#app'
+      el: '#app',
+      data: {
+        usernames: ['Nick18201', 'Tahul', 'Cveneziani', 'nfilzi']
+      }
     })
   </script>
 </body>
